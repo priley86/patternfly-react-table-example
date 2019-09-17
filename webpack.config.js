@@ -1,33 +1,38 @@
 const webpack = require('webpack');
 const miniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebPackPlugin = require("html-webpack-plugin");
+const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 const htmlPlugin = new HtmlWebPackPlugin({
-  template: "./src/index.html",
-  filename: "./index.html"
+  template: './src/index.html',
+  filename: './index.html'
 });
 
 module.exports = {
   module: {
     rules: [
       {
-          test: /\.(js|jsx)$/,
-          loader: 'babel-loader',
-          exclude: /node_modules/,
+        test: /\.(js|jsx)$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/
       },
       {
-          test: /\.css$/,
-          use: [
-              {
-                  loader: "style-loader"
-              },
-              miniCssExtractPlugin.loader,
-              {
-                  loader: 'css-loader',
-                  options: { url: false }
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              attributes: {
+                nonce: 'emotion'
               }
-          ],
-      },
+            }
+          },
+          // miniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: { url: false }
+          }
+        ]
+      }
     ]
   },
   resolve: {
@@ -39,11 +44,11 @@ module.exports = {
     filename: 'bundle.js'
   },
   plugins: [
-    new miniCssExtractPlugin("[name].css"),
+    // new miniCssExtractPlugin('[name].css'),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebPackPlugin({
-        template: "./src/index.html",
-        filename: "./index.html"
+      template: './src/index.html',
+      filename: './index.html'
     })
   ],
   devServer: {

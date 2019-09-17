@@ -11,6 +11,14 @@ import {
   cellWidth
 } from '@patternfly/react-table';
 
+// the better way could be to use @emotion/core and its Cache context...
+import { CacheProvider } from '@emotion/core';
+import createCache from '@emotion/cache';
+export const myCache = createCache({
+  key: 'my-prefix-key',
+  nonce: 'my-nonce-key'
+});
+
 export class App extends React.Component {
   constructor(props) {
     super(props);
@@ -76,16 +84,18 @@ export class App extends React.Component {
     const { columns, rows } = this.state;
 
     return (
-      <Table
-        caption="Compact expandable table"
-        variant={TableVariant.compact}
-        onCollapse={this.onCollapse}
-        rows={rows}
-        cells={columns}
-      >
-        <TableHeader />
-        <TableBody />
-      </Table>
+      <CacheProvider value={myCache}>
+        <Table
+          caption="Compact expandable table"
+          variant={TableVariant.compact}
+          onCollapse={this.onCollapse}
+          rows={rows}
+          cells={columns}
+        >
+          <TableHeader />
+          <TableBody />
+        </Table>
+      </CacheProvider>
     );
   }
 }

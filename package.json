@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "bundle": "webpack --progress"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +23,8 @@
     "webpack-dev-server": "^3.8.0"
   },
   "dependencies": {
+    "@emotion/cache": "^10.0.19",
+    "@emotion/core": "^10.0.17",
     "@patternfly/patternfly": "^2.30.0",
     "@patternfly/react-table": "^2.17.5",
     "css-loader": "^3.2.0",
